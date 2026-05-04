@@ -3,13 +3,19 @@ from text_chunker import chunkText
 from Ingestion import getTextFromDocuments
 import ollama
 
+# from sentence_transformers import SentenceTransfromer
+from sentence_transformers import SentenceTransformer
+
 client = chromadb.Client()
-collection = client.create_collection(name="pdf-collection")
+# I will later insert the pdf or document for companies policies to ask some questions the model
+collection = client.create_collection(name="myCv")
+model = SentenceTransformer('all-MiniLM-L6-v2')
 
 chunks = chunkText(getTextFromDocuments("E:/resume folder/Amanuel Belete [cv].pdf"))
 
 for i, chunk in enumerate(chunks):
-    embeddings = ollama.embed(model='nomic-embed-text', input=chunk)
+    embeddings = model.encode(chunk).toList()
+    print(embeddings)
     collection.add(
         ids=[f"chunk-{i}"],
         embeddings=embeddings,
