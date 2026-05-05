@@ -4,8 +4,8 @@ from Ingestion import getTextFromDocuments
 from sentence_transformers import SentenceTransformer
 
 
-PDF_PATH = "E:/resume folder/Amanuel Belete [cv].pdf"
-COLLECTION_NAME = "bm_policy_analyzer"
+PDF_PATH = "bm/bm_tech_handbook.md"
+COLLECTION_NAME = "bm_policy_collection"
 
 def create_vector_store():
     # Load and chunk the document
