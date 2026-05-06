@@ -1,10 +1,14 @@
 """Main query pipeline."""
+from src.config import RETRIEVAL_SIMILARITY_THRESHOLD
 from .retrieval import retrieve_documents
 from .generation import generate_response
 
 
-def query_documents(user_query, top_k=5, use_transform=True, similarity_threshold=0.5):
+def query_documents(user_query, top_k=5, use_transform=True, similarity_threshold=None):
     """Main pipeline: Retrieve relevant docs and generate answer."""
+    if similarity_threshold is None:
+        similarity_threshold = RETRIEVAL_SIMILARITY_THRESHOLD
+
     print(f"\n[Retrieval] Searching for: '{user_query}'")
 
     docs, distances = retrieve_documents(
@@ -22,7 +26,7 @@ def query_documents(user_query, top_k=5, use_transform=True, similarity_threshol
     print(f"[Retrieval] Retrieved {len(docs)} documents")
 
     for i, (doc, dist) in enumerate(zip(docs, distances)):
-        similarity = (1 - dist) * 100
+        similarity = max(0, (1 - dist / 2) * 100)
         print(f"  Doc {i+1}: {similarity:.1f}% similar")
 
     answer = generate_response(context, user_query)

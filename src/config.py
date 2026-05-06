@@ -20,7 +20,7 @@ CHUNK_SIZE = 500
 CHUNK_OVERLAP = 100
 
 RETRIEVAL_TOP_K = 5
-RETRIEVAL_SIMILARITY_THRESHOLD = 0.5
+RETRIEVAL_SIMILARITY_THRESHOLD = 0.2
 
 SYSTEM_PROMPT = """You are a helpful AI assistant that answers questions based ONLY on the
 provided context from the BM Technology Employee Handbook.

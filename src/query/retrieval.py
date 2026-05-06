@@ -44,11 +44,11 @@ def retrieve_documents(
     docs = results["documents"][0]
     distances = results["distances"][0]
 
-    if similarity_threshold:
+    if similarity_threshold is not None:
         filtered_docs = []
         filtered_distances = []
         for doc, distance in zip(docs, distances):
-            similarity = 1 - distance
+            similarity = max(0, 1 - distance / 2)
             if similarity >= similarity_threshold:
                 filtered_docs.append(doc)
                 filtered_distances.append(distance)

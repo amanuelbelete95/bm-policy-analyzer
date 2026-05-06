@@ -20,8 +20,7 @@ def main():
         answer, docs, distances = query_documents(
             user_input,
             top_k=5,
-            use_transform=True,
-            similarity_threshold=0.3
+            use_transform=True
         )
 
         print(f"\nAnswer: {answer}\n")
