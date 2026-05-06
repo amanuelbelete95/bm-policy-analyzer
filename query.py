@@ -123,20 +123,16 @@ def query_documents(user_query, top_k=5, use_transform=True, similarity_threshol
 if __name__ == "__main__":
     print("BM Technology Handbook Q&A")
     print("=" * 40)
-    print("Ask questions about company policies.")
-    print("Type 'exit' to quit.\n")
+    print("Ask questions about company policies.\n")
 
-    while True:
-        user_input = input("Your question: ")
-        if user_input.lower() == 'exit':
-            break
+    test_question = "What is the vacation policy?"
+    print(f"Testing with: {test_question}\n")
 
-        answer, docs, distances = query_documents(
-            user_input,
-            top_k=5,
-            use_transform=True,
-            similarity_threshold=0.5
-        )
+    answer, docs, distances = query_documents(
+        test_question,
+        top_k=5,
+        use_transform=False,
+        similarity_threshold=0.3
+    )
 
-        print(f"\nAnswer: {answer}\n")
-        print("-" * 40)
+    print(f"\nAnswer: {answer}\n")
