@@ -5,19 +5,26 @@ from src.query import query_documents
 def main():
     print("BM Technology Handbook Q&A")
     print("=" * 40)
-    print("Ask questions about company policies.\n")
+    print("Ask questions about company policies.")
+    print("Type 'quit' or 'exit' to stop.\n")
 
-    test_question = "What is the vacation policy?"
-    print(f"Testing with: {test_question}\n")
+    while True:
+        user_input = input("Question: ").strip()
+        if user_input.lower() in ("quit", "exit"):
+            print("Goodbye!")
+            break
 
-    answer, docs, distances = query_documents(
-        test_question,
-        top_k=5,
-        use_transform=False,
-        similarity_threshold=0.3
-    )
+        if not user_input:
+            continue
 
-    print(f"\nAnswer: {answer}\n")
+        answer, docs, distances = query_documents(
+            user_input,
+            top_k=5,
+            use_transform=True,
+            similarity_threshold=0.3
+        )
+
+        print(f"\nAnswer: {answer}\n")
 
 
 if __name__ == "__main__":
